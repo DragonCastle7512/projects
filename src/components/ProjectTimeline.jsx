@@ -13,7 +13,103 @@ const PROJECTS = [
   {
     id: 1,
     year: "2026",
-    period: "2026.02 — 진행중",
+    period: "2026.05 — 2026.05",
+    title: "hanul-keyboard - 천지인 커스텀 키보드 (IME)",
+    tagline:
+      "이전에는 존재했던(지금은 사라진) '한울 키보드'의 키보드 배열을 재현한 IME 앱",
+    type: "side",
+    role: "End to End",
+    team: { type: "solo", desc: "개인 프로젝트", icon: "⌨️" },
+    arch: [
+      { label: "Presentation", color: "#2563eb", text: "HanulKeyboard UI - 테마 연동(Context API) 및 입력 모드(한글/영어/기호)별 반응형 키패드 레이아웃 렌더링" },
+      { label: "System Hook", color: "#b8028a", text: "InputMethodService - 안드로이드 OS 수준의 시스템 키보드 활성화 및 입력 필드 포커싱 라이프사이클 제어" },
+      { label: "Bridge", color: "#008caf", text: "IMEModule (Native Module) - React Native와 Android Native InputConnection 간의 글자 입력/선택 영역 동기화" },
+      { label: "Logic Engine", color: "#d97706", text: "KeyboardStateManager - 천지인 낱글자(ㅣ, ·, ㅡ) 자음/모음 입력 이벤트 처리 및 자모 조합 상태 관리" },
+      { label: "Persistence", color: "#059669", text: "AsyncStorage - 키보드 테마 등의 사용자 개인 환경 설정 보존" }
+    ],
+    stack: {
+      Frontend: ["React Native", "Expo", "TypeScript"],
+      Library: ["hangul-js"],
+      Native: ["Kotlin", "Android SDK"],
+    },
+    tasks: [
+      { text: "Android InputMethodService를 커스텀 구현하여 OS 시스템 키보드 등록 인터페이스 설계", tags: ["구현", "Native"], tagType: "side" },
+      { text: "Kotlin 기반 IMEModule을 통해 React Native UI 이벤트와 Android InputConnection 간의 글자 입력/삭제/커서이동(commitText, setComposingText, finishComposingText) 브릿징 구현", tags: ["구현", "Native"], tagType: "side" },
+      { text: "KeyboardStateManager와 hangul-js를 활용하여 천지인 한글(ㅣ, ·, ㅡ) 자음/모음 조합 입력 상태 기계 및 실시간 문자 완성 알고리즘 설계", tags: ["구현", "알고리즘"], tagType: "side" },
+      { text: "테스트 코드 작성 및 검증을 통한 회귀 버그 최소화", tags: ["테스트"], tagType: "team" },
+      { text: "expo 클라우드 빌드를 활용하여 apk 파일 배포", tags: ["Build"], tagType: "study" },
+    ],
+    troubles: [
+      {
+        q: "텍스트 입력창 포커스 변경 시 이전 입력 상태(조합 중인 낱글자)가 유지되는 문제",
+        a: "다른 입력창으로 포커스가 이동할 때 이전 버퍼가 남아 오입력이 발생했습니다. onStartInput 이벤트 발생 시 React Native 측으로 onResetState 이벤트를 전송하여 입력 버퍼와 자모 조합 엔진의 상태를 강제 초기화하도록 설계했습니다."
+      },
+      {
+        q: "키보드 전환 시 내비게이션 바 등 단말기 하단 영역의 렌더링 높이 계산이 어긋나 키보드가 잘리는 문제",
+        a: "기기마다 내비게이션 바 높이가 달라 고정 높이 적용 시 렌더링이 깨지는 현상이 있었습니다. 디바이스 치수를 동적으로 읽어 DP로 변환하고, 전달하여 안정적인 반응형 레이아웃을 구현했습니다."
+      },
+      {
+        q: "글자 조합(setComposingText) 및 커서 이동 중 Native onUpdateSelection과 JS 입력 엔진 간 무한 동기화 루프가 돌며 커서가 꼬이는 문제",
+        a: "네이티브 조합 갱신이 또 다른 selection 이벤트를 발생시켜 양방향 무한 호출이 유발되었습니다. Kotlin 네이티브 측 조합 동작 처리 시 50ms 동안 플래그를 두어 내부 업데이트에 따른 Selection 변경 알림을 차단함으로써 루프를 방지했습니다."
+      }
+    ],
+    links: [{ label: "GitHub", href: "https://github.com/DragonCastle7512/hanul-keyboard" }, ],
+  },
+  {
+    id: 2,
+    year: "2026",
+    period: "2026.04 — 2026.05",
+    title: "calendar - 안드로이드 위젯 지원 달력",
+    tagline:
+      "불필요하게 복잡한 기능은 전부 간소화 시켜 핵심 기능인 캘런더 + 메모만을 편리하게 조작 가능한 달력 앱.",
+    type: "side",
+    role: "End to End",
+    team: { type: "solo", desc: "개인 프로젝트", icon: "📅" },
+    arch: [
+      { label: "Presentation", color: "#2563eb", text: "MemoWidget & App UI - 홈 화면 위젯 뷰 렌더링 및 모바일 앱 내 캘린더 화면(react-native-calendars) 연동" },
+      { label: "Scheduler", color: "#008caf", text: "AlarmManager & BroadcastReceiver - 매일 자정 위젯 강제 날짜 갱신 및 기기 시간/시간대 설정 변경 스케줄러 등록" },
+      { label: "Logic Engine", color: "#d97706", text: "lunar-javascript & Holiday Calc - 매년 음력 24절기 및 변동 국가 공휴일/대체 휴일 계산 알고리즘 수행" },
+      { label: "Task Handler", color: "#1b129b", text: "widgetTaskHandler - 위젯 클릭 이벤트 디바운스 처리 및 라이프사이클 이벤트 연계 비즈니스 로직 제어" },
+      { label: "Persistence", color: "#059669", text: "AsyncStorage - 공휴일 API 호출 캐시 데이터 및 유저 작성 일정 메모(Events/Memos), 위젯 설정 파라미터 보존" }
+    ],
+    stack: {
+      Frontend: ["React Native", "Expo", "TypeScript", "expo-router"],
+      Library: ["react-native-calendars", "react-native-android-widget", "lunar-javascript"],
+      Native: ["Kotlin", "Java", "Android SDK", "AlarmManager"],
+      Build: ["Expo Config Plugin"],
+    },
+    tasks: [
+      { text: "앱과 위젯 달력 및 HandlerState 관리로 Draggable 방식의 인터랙티브 메모 컴포넌트 구현", tags: ["구현"], tagType: "side" },
+      { text: "Kotlin 기반 WidgetUpdateScheduler 및 AlarmManager 연동을 통한 매일 자정 위젯 자동 업데이트 백그라운드 태스크 구현", tags: ["구현", "Native"], tagType: "side" },
+      { text: "lunar-javascript를 활용한 음력 윤달/명절 및 매년 변동되는 대체 공휴일 계산 기능 통합 구현", tags: ["구현", "알고리즘"], tagType: "side" },
+      { text: "불필요한 API 호출 방지 및 지연시간 최소화를 위해 공휴일 정보를 최초 1회만 받아와 캐싱", tags: ["성능"], tagType: "team" },
+      { text: "빌드 타임에 AndroidManifest.xml 권한 설정과 BroadcastReceiver 동적 등록을 자동화하는 Expo Config Plugin 작성", tags: ["Build", "Plugin"], tagType: "study" },
+      { text: "Docker 기반 로컬 aab 파일 빌드 및 play console 배포", tags: ["Infra", "Docker"], tagType: "study" },
+    ],
+    troubles: [
+      {
+        q: "하루가 경과한 이후 위젯의 오늘 날짜가 어제 날짜 그대로 표기되는 문제",
+        a: "매일 자정 알림 스케줄러 도입 및 기기 설정을 통해 시간을 강제로 변경하거나 표준 시간대를 바꿀 경우를 대비해, TIME_SET, TIMEZONE_CHANGED 이벤트를 감지하는 네이티브 리시버를 등록하여 즉각 갱신시키도록 하였습니다."
+      },
+      {
+        q: "이전/다음 달 이동 시 비동기 렌더링 지연으로 인한 연속 터치 시 위젯 UI 데이터가 꼬이는 문제",
+        a: "AsyncStorage에 클릭 액션의 renderTime 타임스탬프를 함께 캐싱하고, 300ms 디바운스 제어 및 이전 렌더링 타임보다 오래된 클릭 요청은 무시하도록 필터링 로직을 개발했습니다."
+      },
+      {
+        q: "위젯이 유휴상태로 전환된 이후 날짜 전환이 매우 느려지는 문제",
+        a: "모든 날짜 딥링크 연결, 랜더링 등으로 약 2400ms 걸리는 네이티브 지연을 Dual-Phase Rendering(선 랜더링 이후 딥링크 연결) PendingIntent 캐싱, 컴포넌트 최적화(useMemo 활용) 등으로 약 1180ms의 지연시간을 단축시켰습니다."
+      },
+      {
+        q: "앱 프로세스가 죽어있는 상태에서 위젯 상호작용이 먹통인 문제",
+        a: "Linking.openURL 방식에서 OPEN_URI 방식으로 변경하여 앱이 죽어있는 상태라면 앱 실행 이후 상호작용이 수행되도록 수정하였습니다."
+      }
+    ],
+    links: [{ label: "GitHub", href: "https://github.com/DragonCastle7512/calendar" }],
+  },
+  {
+    id: 3,
+    year: "2026",
+    period: "2026.02 — 2026.04",
     title: "discord - 디스코드 멀티기능 봇",
     tagline:
       "Discord.js 기반으로 음악 재생, TTS, AI 대화, 슬래시 커맨드를 통합한 운영형 봇 프로젝트.",
@@ -72,7 +168,7 @@ const PROJECTS = [
     links: [{ label: "GitHub", href: "https://github.com/DragonCastle7512/discord" }],
   },
   {
-    id: 2,
+    id: 4,
     year: "2026",
     period: "2026.01 — 2026.02",
     title: "IA2E - 통합 AI API 호출",
@@ -127,7 +223,7 @@ const PROJECTS = [
     links: [{ label: "GitHub", href: "https://github.com/DragonCastle7512/IA2E" }],
   },
   {
-    id: 3,
+    id: 5,
     year: "2025",
     period: "2025.10 — 2025.12",
     title: "HotelHub - 호텔 예약 사이트",
@@ -175,13 +271,13 @@ const PROJECTS = [
     links: [{ label: "GitHub", href: "https://github.com/DragonCastle7512/Hotel_booking_backend" }],
   },
   {
-    id: 4,
+    id: 6,
     year: "2025",
     period: "2025.08 — 2025.09",
     title: "BookForest - 서적 구매 사이트",
     tagline:
       "서적 구매 서비스를 구축하며 조회 성능 개선, 보안 강화, 인프라 마이그레이션과 배포 자동화를 담당한 팀 프로젝트.",
-    type: "team",  // team | side | study
+    type: "team",
     role: "End to End",
     team: { type: "team", desc: "5인 팀", icon: "👥" },
     arch: [
@@ -227,7 +323,7 @@ const PROJECTS = [
     links: [{ label: "GitHub", href: "https://github.com/DragonCastle7512/BookStore/tree/master" }],
   },
   {
-    id: 5,
+    id: 7,
     year: "2024",
     period: "2024.06 - 2025.02",
     title: "Magical Travel - 2D 생존 액션 RPG",
@@ -274,7 +370,7 @@ const PROJECTS = [
     links: [{ label: "GitHub", href: "https://github.com/DragonCastle7512/RpgProject" }],
   },
   {
-    id: 6,
+    id: 8,
     year: "2023",
     period: "2023.12 - 2023.12",
     title: "MiniGame - 위험 구역 회피 생존 게임",
