@@ -21,11 +21,11 @@ const PROJECTS = [
     role: "End to End",
     team: { type: "solo", desc: "개인 프로젝트", icon: "⌨️" },
     arch: [
-      { label: "Presentation", color: "#2563eb", text: "HanulKeyboard UI - 테마 연동(Context API) 및 입력 모드(한글/영어/기호)별 반응형 키패드 레이아웃 렌더링" },
+      { label: "Presentation", color: "#2563eb", text: "HanulKeyboard UI - 테마 연동(Context API) 및 입력 모드(한글/영어/기호)별 반응형 키패드 레이아웃" },
       { label: "System Hook", color: "#b8028a", text: "InputMethodService - 안드로이드 OS 수준의 시스템 키보드 활성화 및 입력 필드 포커싱 라이프사이클 제어" },
       { label: "Bridge", color: "#008caf", text: "IMEModule (Native Module) - React Native와 Android Native InputConnection 간의 글자 입력/선택 영역 동기화" },
       { label: "Logic Engine", color: "#d97706", text: "KeyboardStateManager - 천지인 낱글자(ㅣ, ·, ㅡ) 자음/모음 입력 이벤트 처리 및 자모 조합 상태 관리" },
-      { label: "Persistence", color: "#059669", text: "AsyncStorage - 키보드 테마 등의 사용자 개인 환경 설정 보존" }
+      { label: "Persistence", color: "#059669", text: "AsyncStorage - 키보드 테마 등의 사용자 개인 환경 설정 데이터" }
     ],
     stack: {
       Frontend: ["React Native", "Expo", "TypeScript"],
@@ -34,7 +34,7 @@ const PROJECTS = [
     },
     tasks: [
       { text: "Android InputMethodService를 커스텀 구현하여 OS 시스템 키보드 등록 인터페이스 설계", tags: ["구현", "Native"], tagType: "side" },
-      { text: "Kotlin 기반 IMEModule을 통해 React Native UI 이벤트와 Android InputConnection 간의 글자 입력/삭제/커서이동(commitText, setComposingText, finishComposingText) 브릿징 구현", tags: ["구현", "Native"], tagType: "side" },
+      { text: "Kotlin 기반 IMEModule을 통해 React Native UI 이벤트와 Android InputConnection 간의 글자 입력/삭제/커서이동(commitText, setComposingText, finishComposingText) 브릿징", tags: ["구현", "Native"], tagType: "side" },
       { text: "KeyboardStateManager와 hangul-js를 활용하여 천지인 한글(ㅣ, ·, ㅡ) 자음/모음 조합 입력 상태 기계 및 실시간 문자 완성 알고리즘 설계", tags: ["구현", "알고리즘"], tagType: "side" },
       { text: "테스트 코드 작성 및 검증을 통한 회귀 버그 최소화", tags: ["테스트"], tagType: "team" },
       { text: "expo 클라우드 빌드를 활용하여 apk 파일 배포", tags: ["Build"], tagType: "study" },
@@ -66,11 +66,11 @@ const PROJECTS = [
     role: "End to End",
     team: { type: "solo", desc: "개인 프로젝트", icon: "📅" },
     arch: [
-      { label: "Presentation", color: "#2563eb", text: "MemoWidget & App UI - 홈 화면 위젯 뷰 렌더링 및 모바일 앱 내 캘린더 화면(react-native-calendars) 연동" },
-      { label: "Scheduler", color: "#008caf", text: "AlarmManager & BroadcastReceiver - 매일 자정 위젯 강제 날짜 갱신 및 기기 시간/시간대 설정 변경 스케줄러 등록" },
+      { label: "Presentation", color: "#2563eb", text: "MemoWidget & App UI - 홈 화면 위젯 뷰 렌더링 및 모바일 앱 내 캘린더 화면" },
+      { label: "Scheduler", color: "#008caf", text: "AlarmManager & BroadcastReceiver - 매일 자정 위젯 강제 날짜 갱신 및 기기 시간/시간대 설정 변경 스케줄러" },
       { label: "Logic Engine", color: "#d97706", text: "lunar-javascript & Holiday Calc - 매년 음력 24절기 및 변동 국가 공휴일/대체 휴일 계산 알고리즘 수행" },
       { label: "Task Handler", color: "#1b129b", text: "widgetTaskHandler - 위젯 클릭 이벤트 디바운스 처리 및 라이프사이클 이벤트 연계 비즈니스 로직 제어" },
-      { label: "Persistence", color: "#059669", text: "AsyncStorage - 공휴일 API 호출 캐시 데이터 및 유저 작성 일정 메모(Events/Memos), 위젯 설정 파라미터 보존" }
+      { label: "Persistence", color: "#059669", text: "AsyncStorage - 공휴일 API 호출 캐시 데이터 및 유저 작성 일정 메모, 위젯 설정 파라미터 보존" }
     ],
     stack: {
       Frontend: ["React Native", "Expo", "TypeScript", "expo-router"],
@@ -118,14 +118,13 @@ const PROJECTS = [
     team: { type: "solo", desc: "개인 프로젝트", icon: "💻" },
     infra: discordArch,
     arch: [
-      { label: "Event Gateway", color: "#2563eb", text: "Discord Gateway - 이벤트 수신 및 상호작용 처리" },
+      { label: "Presentation", color: "#2563eb", text: "UI & Controller - 봇 소개, 대시보드 화면 및 웹 API 엔드포인트" },
+      { label: "Event Gateway", color: "#1a5e09", text: "Discord Gateway - 이벤트 수신 및 상호작용 처리" },
       { label: "Interaction", color: "#b8028a", text: "Slash Commands - 기능 단위 명령 실행" },
       { label: "Voice Engine", color: "#008caf", text: "Shoukaku/Lavalink - 음성 채널 재생 및 큐 제어" },
-      { label: "Audio Delivery", color: "#d97706", text: "HTTP Store - tts 음성 파일 임시 제공" },
       { label: "Intelligence", color: "#1b129b", text: "Talk Runtime - 메시지 기반 AI 응답 및 Function Calling 기반 기능 제어" },
       { label: "Persistence", color: "#059669", text: "Repository - Sequelize 기반 DB 쿼리 실행 및 데이터 조작" },
-      { label: "Domain", color: "#db4531", text: "Model - 데이터베이스 테이블 구조 정의 및 데이터 타입 관리" },
-      { label: "Database", color: "#7c3aed", text: "OracleDB - 실제 데이터 저장 및 관리" },
+      { label: "Data", color: "#db4531", text: "Model - 데이터베이스 테이블 구조 정의 및 데이터 타입 관리" },
     ],
     stack: {
       Runtime: ["Express.js"],
@@ -165,7 +164,10 @@ const PROJECTS = [
         a: "순차적으로 처리되던 노래 유효성 검증 과정을 병렬로 처리하여 평균 응답 속도를 6103ms -> 1667ms로 개선했습니다. ",
       },
     ],
-    links: [{ label: "GitHub", href: "https://github.com/DragonCastle7512/discord" }],
+    links: [
+      { label: "GitHub", href: "https://github.com/DragonCastle7512/discord" },
+      { label: "Demo Link", href: "https://chisabot.duckdns.org" }
+    ],
   },
   {
     id: 4,
@@ -183,8 +185,7 @@ const PROJECTS = [
       { label: "Middleware", color: "#008caf", text: "Auth - 인증/인가 및 요청 데이터 사전 검증" },
       { label: "Presentation", color: "#2563eb", text: "Controller - 요청 파라미터 추출, 유효성 검사 및 최종 응답 반환" },
       { label: "Persistence", color: "#059669", text: "Repository - Sequelize 기반 DB 쿼리 실행 및 데이터 조작" },
-      { label: "Domain", color: "#db4531", text: "Model - 데이터베이스 테이블 구조 정의 및 데이터 타입 관리" },
-      { label: "Database", color: "#7c3aed", text: "PostgreSQL - 실제 데이터 저장 및 관리" },
+      { label: "Data", color: "#db4531", text: "Model - 데이터베이스 테이블 구조 정의 및 데이터 타입 관리" },
     ],
     stack: {
       Frontend: ["HTML", "CSS", "JavaScript"],
@@ -237,8 +238,7 @@ const PROJECTS = [
       { label: "Presentation", color: "#2563eb", text: "Controller - HTTP 요청 검증 및 응답 반환" },
       { label: "Business", color: "#d97706", text: "Service - 비즈니스 로직 수행 및 트랜잭션 관리" },
       { label: "Persistence", color: "#059669", text: "Repository - JPA 기반 데이터 영속화 및 DB 접근" },
-      { label: "Domain", color: "#db4531", text: "Entity - 실제 데이터 모델 및 영속성 컨텍스트 관리" },
-      { label: "Database", color: "#7c3aed", text: "MariaDB - 실제 데이터 저장 및 관리" },
+      { label: "Data", color: "#db4531", text: "Entity - 실제 데이터 모델 및 영속성 컨텍스트 관리" },
     ],
     infra: hotelArch,
     stack: {
@@ -285,8 +285,7 @@ const PROJECTS = [
       { label: "Presentation", color: "#2563eb", text: "Controller - HTTP 요청 검증 및 응답 반환" },
       { label: "Business", color: "#d97706", text: "Service - 비즈니스 로직 수행 및 트랜잭션 관리" },
       { label: "Persistence", color: "#059669", text: "Repository - Mybatis 기반 데이터 영속화 및 DB 접근" },
-      { label: "Domain", color: "#db4531", text: "Mapper - 비즈니스 데이터 객체 및 속성 관리" },
-      { label: "Database", color: "#7c3aed", text: "Oracle Database - 실제 데이터 저장 및 관리" },
+      { label: "Data", color: "#db4531", text: "Mapper - 비즈니스 데이터 객체 및 속성 관리" },
     ],
     infra: bookArch,
     stack: {
