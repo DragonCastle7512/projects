@@ -13,6 +13,70 @@ const PROJECTS = [
   {
     id: 1,
     year: "2026",
+    period: "2026.02 — 2026.07",
+    title: "discord - 디스코드 멀티기능 봇",
+    tagline:
+      "Discord.js 기반으로 음악 재생, TTS, AI 대화, 슬래시 커맨드를 통합한 운영형 봇 프로젝트.",
+    type: "side",
+    role: "End to End",
+    team: { type: "solo", desc: "개인 프로젝트", icon: "💻" },
+    infra: discordArch,
+    arch: [
+      { label: "Presentation", color: "#2563eb", text: "UI & Controller - 봇 소개, 대시보드 화면 및 웹 API 엔드포인트" },
+      { label: "Event Gateway", color: "#1a5e09", text: "Discord Gateway - 이벤트 수신 및 상호작용 처리" },
+      { label: "Interaction", color: "#b8028a", text: "Slash Commands - 기능 단위 명령 실행" },
+      { label: "Voice Engine", color: "#008caf", text: "Shoukaku/Lavalink - 음성 채널 재생 및 큐 제어" },
+      { label: "Intelligence", color: "#1b129b", text: "Talk Runtime - 메시지 기반 AI 응답 및 Function Calling 기반 기능 제어" },
+      { label: "Persistence", color: "#059669", text: "Repository - Sequelize 기반 DB 쿼리 실행 및 데이터 조작" },
+      { label: "Data", color: "#db4531", text: "Model - 데이터베이스 테이블 구조 정의 및 데이터 타입 관리" },
+    ],
+    stack: {
+      Runtime: ["Express.js"],
+      Platform: ["Discord.js"],
+      AI: ["Gemini API"],
+      Audio: ["Lavalink", "Shoukaku", "FFmpeg"],
+      Database: ["Sequelize", "Oracle"],
+      Infra: ["Oracle Cloud", "Docker Compose", "Jenkins", "CI/CD"],
+    },
+    tasks: [
+      { text: "Lavalink 노드 연결 상태 관리 고가용 전략 구성", tags: ["Audio"], tagType: "side" },
+      { text: "TTS 오디오를 HTTP 엔드포인트로 제공하는 런타임 구성", tags: ["Audio", "TTS"], tagType: "side" },
+      { text: "AI 응답 및 Function Calling 기반 AI Agent 봇으로 디스코드 기능 제어", tags: ["구현", "AI"], tagType: "side" },
+      { text: "에이전틱 루프 및 재생 로직(배열 형태로 확장) 병렬 처리로 처리 속도 최대 9배 향상", tags: ["성능", "AI"], tagType: "team" },
+      { text: "주요 데이터 집계 및 sentry 연동으로 빠른 오류 대응 환경 구성", tags: ["모니터링"], tagType: "team" },
+      { text: "Docker Compose 기반 다중 컨테이너 관리", tags: ["Infra", "Docker"], tagType: "study" },
+      { text: "Oracle Cloud 배포 및 Jenkin 기반 CI/CD 파이프라인 구축", tags: ["Infra", "CI/CD"], tagType: "study" },
+    ],
+    troubles: [
+      {
+        q: "lavalink 'this video requires login' 오류로 youtube 재생 실패 문제",
+        a: "lavalink에 ytcipher 플러그인을 추가하고, youtube 서명 해독과 클라이언트를 OAuth 로그인 지원하는 TVHTML을 사용하여 재생하였습니다.",
+      },
+      {
+        q: "사용자가 모두 나간 뒤에도 봇이 채널에 남는 문제",
+        a: "voiceStateUpdate에서 사용자 수를 검증하고 자동 정리 로직을 추가해 리소스 점유를 줄였습니다.",
+      },
+      {
+        q: "첫 요청 + 1일 주기로 refresh_token 발급 과정으로 1번씩 재생에 실패하는 문제",
+        a: "lavalink-prewarm 컨테이너를 함께 띄워서 처음 1회 + 1일 주기로 lavalink에 더미 요청을 보내 토큰 재발급 받도록하였습니다.",
+      },
+      {
+        q: "노래 추천 시스템 UI 기반 페이지 업데이트 과정에서의 불필요한 API 호출 문제",
+        a: "이전/다음 페이지로 넘어가는 과정에서 매번 API 기반의 데이터를 가져오지 않고, 초기 1회 호출 & 사용자별로 결과를 캐싱해두어 불필요한 호출을 최소화 하였습니다.",
+      },
+      {
+        q: "노래 추천 과정이 처리량에 따라 응답 속도가 크게 지연되는 문제",
+        a: "순차적으로 처리되던 노래 유효성 검증 과정을 병렬로 처리하여 평균 응답 속도를 6103ms -> 1667ms로 개선했습니다. ",
+      },
+    ],
+    links: [
+      { label: "GitHub", href: "https://github.com/DragonCastle7512/discord" },
+      { label: "Demo Link", href: "https://chisabot.duckdns.org" }
+    ],
+  },
+  {
+    id: 2,
+    year: "2026",
     period: "2026.05 — 2026.05",
     title: "hanul-keyboard - 천지인 커스텀 키보드 (IME)",
     tagline:
@@ -56,7 +120,7 @@ const PROJECTS = [
     links: [{ label: "GitHub", href: "https://github.com/DragonCastle7512/hanul-keyboard" }, ],
   },
   {
-    id: 2,
+    id: 3,
     year: "2026",
     period: "2026.04 — 2026.05",
     title: "calendar - 안드로이드 위젯 지원 달력",
@@ -105,69 +169,6 @@ const PROJECTS = [
       }
     ],
     links: [{ label: "GitHub", href: "https://github.com/DragonCastle7512/calendar" }],
-  },
-  {
-    id: 3,
-    year: "2026",
-    period: "2026.02 — 2026.04",
-    title: "discord - 디스코드 멀티기능 봇",
-    tagline:
-      "Discord.js 기반으로 음악 재생, TTS, AI 대화, 슬래시 커맨드를 통합한 운영형 봇 프로젝트.",
-    type: "side",
-    role: "End to End",
-    team: { type: "solo", desc: "개인 프로젝트", icon: "💻" },
-    infra: discordArch,
-    arch: [
-      { label: "Presentation", color: "#2563eb", text: "UI & Controller - 봇 소개, 대시보드 화면 및 웹 API 엔드포인트" },
-      { label: "Event Gateway", color: "#1a5e09", text: "Discord Gateway - 이벤트 수신 및 상호작용 처리" },
-      { label: "Interaction", color: "#b8028a", text: "Slash Commands - 기능 단위 명령 실행" },
-      { label: "Voice Engine", color: "#008caf", text: "Shoukaku/Lavalink - 음성 채널 재생 및 큐 제어" },
-      { label: "Intelligence", color: "#1b129b", text: "Talk Runtime - 메시지 기반 AI 응답 및 Function Calling 기반 기능 제어" },
-      { label: "Persistence", color: "#059669", text: "Repository - Sequelize 기반 DB 쿼리 실행 및 데이터 조작" },
-      { label: "Data", color: "#db4531", text: "Model - 데이터베이스 테이블 구조 정의 및 데이터 타입 관리" },
-    ],
-    stack: {
-      Runtime: ["Express.js"],
-      Platform: ["Discord.js"],
-      AI: ["Gemini API"],
-      Audio: ["Lavalink", "Shoukaku", "FFmpeg"],
-      Database: ["Sequelize", "Oracle"],
-      Infra: ["Oracle Cloud", "Docker Compose", "Jenkins", "CI/CD"],
-    },
-    tasks: [
-      { text: "Lavalink 노드 연결 상태 관리 고가용 전략 구성", tags: ["Audio"], tagType: "side" },
-      { text: "TTS 오디오를 HTTP 엔드포인트로 제공하는 런타임 구성", tags: ["Audio", "TTS"], tagType: "side" },
-      { text: "AI 응답 및 Function Calling 기반 AI Agent 봇으로 디스코드 기능 제어", tags: ["구현", "AI"], tagType: "side" },
-      { text: "에이전틱 루프 및 재생 로직(배열 형태로 확장) 병렬 처리로 처리 속도 최대 9배 향상", tags: ["성능", "AI"], tagType: "team" },
-      { text: "Docker Compose 기반 다중 컨테이너 관리", tags: ["Infra", "Docker"], tagType: "study" },
-      { text: "Oracle Cloud 배포 및 Jenkin 기반 CI/CD 파이프라인 구축", tags: ["Infra", "CI/CD"], tagType: "study" },
-    ],
-    troubles: [
-      {
-        q: "lavalink 'this video requires login' 오류로 youtube 재생 실패 문제",
-        a: "lavalink에 ytcipher 플러그인을 추가하고, youtube 서명 해독과 클라이언트를 OAuth 로그인 지원하는 TVHTML을 사용하여 재생하였습니다.",
-      },
-      {
-        q: "사용자가 모두 나간 뒤에도 봇이 채널에 남는 문제",
-        a: "voiceStateUpdate에서 사용자 수를 검증하고 자동 정리 로직을 추가해 리소스 점유를 줄였습니다.",
-      },
-      {
-        q: "첫 요청 + 1일 주기로 refresh_token 발급 과정으로 1번씩 재생에 실패하는 문제",
-        a: "lavalink-prewarm 컨테이너를 함께 띄워서 처음 1회 + 1일 주기로 lavalink에 더미 요청을 보내 토큰 재발급 받도록하였습니다.",
-      },
-      {
-        q: "노래 추천 시스템 UI 기반 페이지 업데이트 과정에서의 불필요한 API 호출 문제",
-        a: "이전/다음 페이지로 넘어가는 과정에서 매번 API 기반의 데이터를 가져오지 않고, 초기 1회 호출 & 사용자별로 결과를 캐싱해두어 불필요한 호출을 최소화 하였습니다.",
-      },
-      {
-        q: "노래 추천 과정이 처리량에 따라 응답 속도가 크게 지연되는 문제",
-        a: "순차적으로 처리되던 노래 유효성 검증 과정을 병렬로 처리하여 평균 응답 속도를 6103ms -> 1667ms로 개선했습니다. ",
-      },
-    ],
-    links: [
-      { label: "GitHub", href: "https://github.com/DragonCastle7512/discord" },
-      { label: "Demo Link", href: "https://chisabot.duckdns.org" }
-    ],
   },
   {
     id: 4,
